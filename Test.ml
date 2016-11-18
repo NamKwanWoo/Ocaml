@@ -35,8 +35,8 @@ and mem = loc -> value
 (*********************************)
 (* empty env *)
 let empty_env = fun x -> raise (Failure "Environment is empty")
-(* extend the environment e with the binding (x,v), where x is a varaible and v is a value *)
-let extend_env (x,v) e = fun y -> if x = y then v else (e y)
+(* extend the environment e with the binding (x, l), where x is a varaible and l is a location *)
+let extend_env (x,l) e = fun y -> if x = y then l else (e y)
 (* look up the environment e for the variable x *)
 let apply_env e x = e x
 
@@ -44,6 +44,7 @@ let apply_env e x = e x
 (* implementation of memory      *)
 (*********************************)
 let empty_mem = fun _ -> raise (Failure "Memory is empty")
+(* extend the memory m with the binding (l, v), where l is a location and v is a value *)
 let extend_mem (l,v) m = fun y -> if l = y then v else (m y)
 let apply_mem m l = m l
 
